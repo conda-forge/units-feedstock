@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: units
+  version: "0.07"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/units-${{ version }}.tar.gz
+  sha256: 43eb3e073e1b11289df7b1c3f184b5b917ccad178b717b03933298716f200e14
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - units
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: Python support for quantities with units
+  license: BSD-3-Clause
+  license_file: units/LICENSE
+  homepage: https://bitbucket.org/adonohue/units/
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
