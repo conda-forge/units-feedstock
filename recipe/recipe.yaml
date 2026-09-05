@@ -30,7 +30,9 @@ tests:
       imports:
         - units
       pip_check: true
-      python_version: ${{ python_min }}
+      python_version:
+        - ${{ python_min }}
+        - "*"
 
 about:
   summary: Python support for quantities with units
